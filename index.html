@@ -3,14 +3,46 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
   <title>Алексей & Дарья — свадьба</title>
   <meta name="description" content="Приглашение на свадьбу Алексея и Дарьи">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Marck+Script&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
+  <!-- Ботанические элементы, переиспользуются через <use> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="branch" viewBox="0 -12 205 52">
+        <path d="M5 30Q100-2 195 30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <g fill="currentColor">
+          <path d="M0 0C5-7 16-8 22 0C16 8 5 7 0 0Z" transform="translate(33.5 21.8) rotate(-55) scale(.75)"/>
+          <path d="M0 0C5-7 16-8 22 0C16 8 5 7 0 0Z" transform="translate(58.2 17.1) rotate(40) scale(.85)"/>
+          <path d="M0 0C5-7 16-8 22 0C16 8 5 7 0 0Z" transform="translate(82.9 14.5) rotate(-45) scale(.95)"/>
+          <path d="M0 0C5-7 16-8 22 0C16 8 5 7 0 0Z" transform="translate(107.6 14.1) rotate(35) scale(1)"/>
+          <path d="M0 0C5-7 16-8 22 0C16 8 5 7 0 0Z" transform="translate(132.3 15.8) rotate(-35) scale(.95)"/>
+          <path d="M0 0C5-7 16-8 22 0C16 8 5 7 0 0Z" transform="translate(157 19.8) rotate(45) scale(.85)"/>
+          <path d="M0 0C5-7 16-8 22 0C16 8 5 7 0 0Z" transform="translate(179.8 25.3) rotate(-25) scale(.75)"/>
+          <path d="M0 0C5-7 16-8 22 0C16 8 5 7 0 0Z" transform="translate(193 29) rotate(20) scale(.7)"/>
+        </g>
+      </symbol>
+      <symbol id="leaf" viewBox="0 0 24 24">
+        <path d="M3 21C3 11 9 4 21 3C20 15 13 21 3 21Z" fill="currentColor"/>
+        <path d="M3 21L15 9" stroke="#fffdfa" stroke-opacity=".6" stroke-width="1" fill="none"/>
+      </symbol>
+      <symbol id="divider" viewBox="0 0 240 24">
+        <path d="M0 12H96M144 12H240" stroke="currentColor" stroke-width="1"/>
+        <path d="M120 3C124 8 124 16 120 21C116 16 116 8 120 3Z M108 12C112 9 117 10 120 12C117 14 112 15 108 12Z M132 12C128 9 123 10 120 12C123 14 128 15 132 12Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="heart" viewBox="0 0 40 36">
+        <path d="M20 34C8 25 2 18 2 11C2 5 6.5 2 11 2C15 2 18 4.5 20 8C22 4.5 25 2 29 2C33.5 2 38 5 38 11C38 18 32 25 20 34Z" fill="currentColor"/>
+      </symbol>
+    </defs>
+  </svg>
+
   <nav class="nav" aria-label="Разделы">
     <a href="#program">Программа</a>
     <a href="#place">Место</a>
@@ -20,84 +52,174 @@
   </nav>
 
   <header class="hero">
-    <p class="eyebrow">Приглашение на свадьбу</p>
-    <h1 class="names"><span data-bind="groom"></span><span class="amp">&</span><span data-bind="bride"></span></h1>
-    <p class="hero-date" data-bind="dateLong"></p>
-    <div class="countdown" id="countdown" aria-live="polite">
-      <div><b data-cd="d">0</b><span>дней</span></div>
-      <div><b data-cd="h">0</b><span>часов</span></div>
-      <div><b data-cd="m">0</b><span>минут</span></div>
+    <div class="hero-bg" aria-hidden="true">
+      <svg class="corner corner-tl"><use href="#branch"/></svg>
+      <svg class="corner corner-br"><use href="#branch"/></svg>
+      <svg class="float f1"><use href="#leaf"/></svg>
+      <svg class="float f2"><use href="#leaf"/></svg>
+      <svg class="float f3"><use href="#leaf"/></svg>
+      <svg class="float f4"><use href="#leaf"/></svg>
+      <svg class="float f5"><use href="#leaf"/></svg>
     </div>
-    <a class="btn" href="#rsvp">Подтвердить присутствие</a>
+
+    <div class="hero-inner">
+      <figure class="arch">
+        <img id="photo" alt="Алексей и Дарья" fetchpriority="high">
+      </figure>
+
+      <div class="hero-text">
+        <p class="eyebrow">Приглашение на свадьбу</p>
+        <h1 class="names">
+          <span data-bind="groom"></span>
+          <span class="amp">&</span>
+          <span data-bind="bride"></span>
+        </h1>
+        <div class="date-row">
+          <span data-bind="month"></span>
+          <b data-bind="day"></b>
+          <span data-bind="year"></span>
+        </div>
+        <a class="btn" href="#rsvp">Подтвердить присутствие</a>
+      </div>
+    </div>
+
+    <a class="scroll-hint" href="#invite" aria-label="Листать вниз"><span></span></a>
   </header>
 
   <main>
-    <section class="section" id="details">
-      <img class="photo" id="photo" alt="Алексей и Дарья">
-      <p class="lead" data-bind="greeting"></p>
-      <p class="text" data-bind="invitation"></p>
-      <dl class="facts">
-        <div><dt>Когда</dt><dd data-bind="dateShort"></dd></div>
-        <div><dt>Сбор гостей</dt><dd data-bind="startTime"></dd></div>
-        <div><dt>Где</dt><dd data-bind="venueName"></dd></div>
-      </dl>
+    <section class="section" id="invite">
+      <div class="wrap narrow reveal">
+        <p class="script-title" data-bind="greeting"></p>
+        <svg class="divider"><use href="#divider"/></svg>
+        <p class="invite-text" data-bind="invitation"></p>
+      </div>
+
+      <div class="wrap when reveal">
+        <div class="calendar card-frame">
+          <p class="cal-title" data-bind="monthYear"></p>
+          <ol class="cal-head" aria-hidden="true"><li>Пн</li><li>Вт</li><li>Ср</li><li>Чт</li><li>Пт</li><li>Сб</li><li>Вс</li></ol>
+          <ol class="cal-grid" id="calendar"></ol>
+        </div>
+
+        <div class="when-side">
+          <dl class="facts">
+            <div><dt>Когда</dt><dd data-bind="dateShort"></dd></div>
+            <div><dt>Сбор гостей</dt><dd data-bind="startTime"></dd></div>
+            <div><dt>Где</dt><dd data-bind="venueName"></dd></div>
+          </dl>
+          <div class="countdown" id="countdown" aria-live="polite">
+            <p class="cd-label">До торжества осталось</p>
+            <div class="cd-row">
+              <div><b data-cd="d">0</b><span>дней</span></div>
+              <div><b data-cd="h">0</b><span>часов</span></div>
+              <div><b data-cd="m">0</b><span>минут</span></div>
+              <div><b data-cd="s">0</b><span>секунд</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="section" id="program">
-      <h2>Программа дня</h2>
-      <ol class="timeline" id="timeline"></ol>
+    <section class="section tinted" id="program">
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <p class="eyebrow">Тайминг</p>
+          <h2>Программа дня</h2>
+          <svg class="divider"><use href="#divider"/></svg>
+        </header>
+        <ol class="timeline" id="timeline"></ol>
+      </div>
     </section>
 
     <section class="section" id="place">
-      <h2>Место</h2>
-      <div class="card">
-        <p class="note" data-bind="venueHall"></p>
-        <p class="card-title" data-bind="venueName"></p>
-        <p class="text" data-bind="venueAddress"></p>
-        <div class="actions">
-          <a class="btn" id="mapLink" target="_blank" rel="noopener">Открыть на Яндекс Картах</a>
-          <a class="btn btn-ghost" id="siteLink" target="_blank" rel="noopener">Сайт площадки</a>
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <p class="eyebrow">Локация</p>
+          <h2>Место встречи</h2>
+          <svg class="divider"><use href="#divider"/></svg>
+        </header>
+        <div class="venue card-frame reveal">
+          <svg class="venue-branch" aria-hidden="true"><use href="#branch"/></svg>
+          <p class="eyebrow" data-bind="venueHall"></p>
+          <p class="venue-name" data-bind="venueName"></p>
+          <p class="venue-addr" data-bind="venueAddress"></p>
+          <div class="actions">
+            <a class="btn" id="mapLink" target="_blank" rel="noopener">Открыть на Яндекс Картах</a>
+            <a class="btn btn-ghost" id="siteLink" target="_blank" rel="noopener">Сайт площадки</a>
+          </div>
         </div>
+        <ul class="notes" id="venueNotes"></ul>
       </div>
-      <ul class="notes" id="venueNotes"></ul>
     </section>
 
-    <section class="section" id="dresscode">
-      <h2>Дресс-код</h2>
-      <p class="text" data-bind="dresscodeText"></p>
-      <ul class="palette" id="palette"></ul>
-      <img class="dress-example" id="dressImage" alt="Пример образов в палитре дня" loading="lazy">
+    <section class="section tinted" id="dresscode">
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <p class="eyebrow">Образы</p>
+          <h2>Дресс-код</h2>
+          <svg class="divider"><use href="#divider"/></svg>
+        </header>
+        <div class="dress">
+          <div class="dress-text reveal">
+            <p class="invite-text" data-bind="dresscodeText"></p>
+            <ul class="palette" id="palette"></ul>
+          </div>
+          <figure class="arch arch-sm reveal">
+            <img id="dressImage" alt="Пример образов в палитре дня" loading="lazy">
+          </figure>
+        </div>
+      </div>
     </section>
 
     <section class="section" id="gifts">
-      <h2>О подарках</h2>
-      <ul class="notes" id="giftsList"></ul>
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <p class="eyebrow">Деликатный вопрос</p>
+          <h2>О подарках</h2>
+          <svg class="divider"><use href="#divider"/></svg>
+        </header>
+        <ul class="gift-cards" id="giftsList"></ul>
+      </div>
     </section>
 
-    <section class="section" id="rsvp">
-      <h2>Ждём ответа до <span data-bind="rsvpDeadline"></span></h2>
-      <div class="form-frame">
-        <iframe id="rsvpFrame" title="Анкета гостя" loading="lazy"></iframe>
+    <section class="section tinted" id="rsvp">
+      <div class="wrap narrow">
+        <header class="sec-head reveal">
+          <p class="eyebrow">Анкета гостя</p>
+          <h2>Ждём ответа до <span data-bind="rsvpDeadline"></span></h2>
+          <svg class="divider"><use href="#divider"/></svg>
+        </header>
+        <div class="form-frame reveal">
+          <iframe id="rsvpFrame" title="Анкета гостя" loading="lazy"></iframe>
+        </div>
+        <p class="hint">Форма не загрузилась? <a id="rsvpLink" target="_blank" rel="noopener">Откройте её в браузере</a>.</p>
       </div>
-      <p class="note center">Форма не загрузилась? <a id="rsvpLink" target="_blank" rel="noopener">Откройте её в браузере</a>.</p>
     </section>
 
     <section class="section" id="contacts">
-      <h2>Контакты</h2>
-      <ul class="contacts" id="contactsList"></ul>
-      <div class="card chat">
-        <img class="qr" id="chatQr" alt="QR-код чата гостей" loading="lazy">
-        <div>
-          <p class="card-title">Чат гостей</p>
-          <p class="text">Присоединяйтесь к нашему чату в Telegram, чтобы быть на связи!</p>
-          <a class="btn" id="chatLink" target="_blank" rel="noopener">Открыть чат в Telegram</a>
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <p class="eyebrow">На связи</p>
+          <h2>Контакты</h2>
+          <svg class="divider"><use href="#divider"/></svg>
+        </header>
+        <ul class="contacts" id="contactsList"></ul>
+        <div class="chat card-frame reveal">
+          <img class="qr" id="chatQr" alt="QR-код чата гостей" loading="lazy">
+          <div>
+            <p class="venue-name">Чат гостей</p>
+            <p class="chat-text">Присоединяйтесь к нашему чату в Telegram, чтобы быть на связи!</p>
+            <a class="btn" id="chatLink" target="_blank" rel="noopener">Открыть чат в Telegram</a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>До встречи!<br><span data-bind="groom"></span> & <span data-bind="bride"></span> · <span data-bind="dateShort"></span></p>
+    <svg class="footer-branch" aria-hidden="true"><use href="#branch"/></svg>
+    <p class="footer-script">До встречи!</p>
+    <p class="footer-names"><span data-bind="groom"></span> & <span data-bind="bride"></span> · <span data-bind="dateDots"></span></p>
   </footer>
 
   <script src="config.js"></script>
